@@ -38,7 +38,7 @@ else {
 	$uid = $result_row1[0];
 	// 該当の引継IDを持つユーザが存在しない場合
 	if ($uid == NULL) {
-		echo "ユーザが存在しません";
+		echo "ユーザが存在しません: mig_id = ".$mig_id;
 	}
 	else {
 		// 該当ユーザのIdPのIDを更新する
