@@ -96,10 +96,13 @@ if(!$db_select){
 ?>
 <input type="hidden" name="mig_id" value="<?php echo $mig_id; ?>">
 <input type="hidden" name="sp" value="sp2">
+<input type="hidden" name="ret_url" value="https://sp2.local/sample/start.php">
 <input type="submit" value="お引越しサービスに登録する">
 </form>
 <form action="https://ap.local/sample/migr.php" method="post">
 <input type="hidden" name="sp" value="sp2">
+<input type="hidden" name="ret_url" value="https://sp2.local/sample/start.php">
+<input type="hidden" name="ret_url2" value="https://sp2.local/sample/complete.php">
 <input type="submit" value="IdPのお引越しを行う">
 </form>
 <a href="logout.php">ログアウト</a>

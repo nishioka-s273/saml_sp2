@@ -41,13 +41,28 @@ else {
 	}
 	else {
 		// 該当ユーザのIdPのIDを更新する
-		$query2 = "UPDATE users SET ".$idp."_uid = '$uid_idp' WHERE uid = '$uid'";
+		$query2 = "UPDATE users SET idp_uid = '$uid_idp' WHERE uid = '$uid'";
 		$result2 = mysqli_query($connection, $query2);
 		if (!$query2) {
 			die ("[error4] Could not query the database: <br />".mysqli_error());
 		}
 		else {
-			echo "IdPのお引越しが完了しました！<br>";
+			// 移行先IdPからの初回ログイン時に生成された新規ユーザを削除する
+			$query3 = "SELECT uid_num FROM users WHERE idp_uid = '$uid_idp'";
+			$result3 = mysqli_query($connection, $query3);
+			if (!$query3) {
+				die ("[error5] Could not query the database: <br />".mysqli_error());
+			}
+			else {
+				$result_row3 = mysqli_fetch_row($result3);
+				$uid_num = $result_row3[0];
+				$query4 = "DELETE FROM users WHERE idp_uid = '$uid_idp' AND uid_num > '$uid_num'";
+				$result4 = mysqli_query($connection, $query4);
+				if (!$query4) {
+					die ("[error6] Could not query the database: <br />".mysqli_error());
+				}
+				echo "IdPのお引越しが完了しました！<br>";
+			}
 		}
 	}
 }
