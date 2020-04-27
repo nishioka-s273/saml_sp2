@@ -26,7 +26,7 @@ if(!$db_select){
     print('IdPのユーザID : '.htmlspecialchars($idp_uid)."<br />");
 
     // ログイン元IdPのユーザIDに対応するアカウントが存在するか確認する 
-    $query1 = "SELECT uid FROM users WHERE ".$idp."_uid = '$idp_uid'";
+    $query1 = "SELECT uid FROM users WHERE idp_uid = '$idp_uid'";
     $result1 = mysqli_query($connection, $query1);
     $result_row1 = mysqli_fetch_row($result1);
     $uid = $result_row1[0];
@@ -48,14 +48,14 @@ if(!$db_select){
 		$u_num = $latest_num + 1;
 		$uid = 'sp2_user'.$u_num;
 		// 新たにユーザ登録をする
-		$query3 = "INSERT INTO users VALUES ('$uid', '', '', 0, '$u_num', '')";
+		$query3 = "INSERT INTO users VALUES ('$uid', '', 0, '$u_num', '')";
 		$result3 = mysqli_query($connection, $query3);
 		if(!$result3){
 			die ("[error5] Could not query the database: <br />".mysqli_error());
 		}
 		else {
 			// IdPのユーザIDを設定する
-			$query4 = "UPDATE users SET ".$idp."_uid = '$idp_uid' WHERE uid = '$uid'";
+			$query4 = "UPDATE users SET idp_uid = '$idp_uid' WHERE uid = '$uid'";
 			$result4 = mysqli_query($connection, $query4);
 			if(!$result4){
 				die ("[error6] Could not query the database: <br />".mysqli_error());

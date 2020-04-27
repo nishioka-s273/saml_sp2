@@ -18,14 +18,13 @@ if(!$db_select){
 }
 
 $uid_idp = $attr['uid'][0].'_sp2';
-echo $idp_uid."<br />";
 $idp = $attr['idp'][0];
 
 // APに保存していた引継IDをクッキーから取得
 if (isset($_COOKIE["mig_id"])){
         $mig_id = $_COOKIE["mig_id"];
-	echo $mig_id."<br />";
 }
+$mig_id = $_POST["mig_id_sp"];
 
 // 該当の引継IDを持つユーザを検索する
 $query1 = "SELECT uid FROM users WHERE mig_id = '$mig_id'";
@@ -48,7 +47,7 @@ else {
 			die ("[error4] Could not query the database: <br />".mysqli_error());
 		}
 		else {
-			echo "IdPのお引越しが完了しました！";
+			echo "IdPのお引越しが完了しました！<br>";
 		}
 	}
 }
